@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>RegistrationForm</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- MATERIAL DESIGN ICONIC FONT -->
+	<link rel="stylesheet" href="{% static 'login/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+
+	<!-- STYLE CSS -->
+	<link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+</head>
+
+<body>
+
+	<div class="wrapper" >
+		<div class="inner" style="border: 1px solid lightgray;border-radius: 10px;     width: 500px;">
+			<form onsubmit="return submitFunction()" style="width:100%;" action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<h3>Registration Form</h3>
+				<div class="form-wrapper">
+					<input type="text" placeholder="First Name" class="form-control" name="first_name" required>
+				</div>
+				<div class="form-wrapper">
+					<input type="text" placeholder="Last Name" class="form-control" name="last_name" required>
+				</div>
+				<div class="form-wrapper">
+					<input type="text" placeholder="Username" class="form-control" name="username" required>
+					<i class="zmdi zmdi-account"></i>
+				</div>
+				<p style="color:red;">{{umsg}}</p>
+				<div class="form-wrapper">
+					<input type="email" placeholder="Email Address" class="form-control" name="email" required>
+					<i class="zmdi zmdi-email"></i>
+				</div>
+				<p style="color:red;">{{email_msg}}</p>
+				
+				<div class="form-wrapper">
+					<input type="password" id="password" placeholder="Password" class="form-control" name="password"
+						required>
+					<i class="zmdi zmdi-lock"></i>
+				</div>
+				<div class="form-wrapper">
+					<input type="password" id="cpassword" placeholder="Confirm Password" class="form-control"
+						name="confirm_password" required>
+					<i class="zmdi zmdi-lock"></i>
+				</div>
+				<p id="message" style="color:red;"></p>
+				<button style="margin-top: 30px;height:40px;">Register
+					<i class="zmdi zmdi-arrow-right"></i>
+				</button>
+				<p class="is_login">I have a account <a href="/login">Login</a></p>
+			</form>
+		</div>
+	</div>
+
+
+	<script>
+		function submitFunction(e) {
+			let password = document.getElementById('password').value;
+			let confirm_password = document.getElementById('cpassword').value;
+			let message = document.getElementById('message');
+
+			if (password.length != 0) {
+				if (password != confirm_password) {
+					message.textContent = "Password don't match"
+					return false;
+				}
+			}
+		}
+	</script>
+
+</body>
+
+</html>
