@@ -24,6 +24,7 @@ def add_employee(request):
             status = request.POST.get('status')
             join_date = request.POST.get('date')
             picture = request.FILES.get('picture')
+            print(picture)
             if status == "on":
                 Employee(name=name, salary=salary,
                          status=True, join_date=join_date, picture=picture).save()
